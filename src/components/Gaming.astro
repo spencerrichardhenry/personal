@@ -1,9 +1,10 @@
 ---
+const base = import.meta.env.BASE_URL;
 const champions = [
-  { name: 'Shaco', mastery: '718,670', level: 10, role: 'Support / Jungle', icon: '/gaming/shaco-icon.png' },
-  { name: 'Pyke', mastery: '101,962', level: 12, role: 'Support', icon: '/gaming/pyke-icon.png' },
-  { name: 'Thresh', mastery: '101,905', level: 12, role: 'Support', icon: '/gaming/thresh-icon.png' },
-  { name: 'Aurora', mastery: '92,761', level: 11, role: 'Mid / Support', icon: '/gaming/aurora-icon.png' },
+  { name: 'Shaco', mastery: '718,670', level: 10, role: 'Support / Jungle', icon: `${base}gaming/shaco-icon.png` },
+  { name: 'Pyke', mastery: '101,962', level: 12, role: 'Support', icon: `${base}gaming/pyke-icon.png` },
+  { name: 'Thresh', mastery: '101,905', level: 12, role: 'Support', icon: `${base}gaming/thresh-icon.png` },
+  { name: 'Aurora', mastery: '92,761', level: 11, role: 'Mid / Support', icon: `${base}gaming/aurora-icon.png` },
 ];
 
 const chatMessages = [
@@ -22,10 +23,10 @@ const chatMessages = [
       <div class="col col-maple">
         <div class="maple-window">
           <div class="maple-header">
-            <img src="/gaming/maplestory-logo.png" alt="MapleStory" class="maple-logo-img" />
+            <img src={`${base}gaming/maplestory-logo.png`} alt="MapleStory" class="maple-logo-img" />
           </div>
           <div class="maple-scene">
-            <img src="/gaming/maple-mushroom.png" alt="Orange Mushroom" class="maple-mushroom-img" />
+            <img src={`${base}gaming/maple-mushroom.png`} alt="Orange Mushroom" class="maple-mushroom-img" />
           </div>
           <div class="maple-body">
             <p class="maple-text">Before there was League, there was MapleStory.</p>
@@ -39,13 +40,13 @@ const chatMessages = [
       <div class="col col-lol">
         <div class="lol-window">
           <div class="lol-header">
-            <img src="/gaming/lol-logo.png" alt="League of Legends" class="lol-logo-img" />
+            <img src={`${base}gaming/lol-logo.png`} alt="League of Legends" class="lol-logo-img" />
             <span class="lol-summoner">operatingcan #NA1</span>
           </div>
 
           <!-- Rank emblem -->
           <div class="rank-row">
-            <img src="/gaming/diamond-emblem.png" alt="Diamond" class="diamond-emblem-img" />
+            <img src={`${base}gaming/diamond-emblem.png`} alt="Diamond" class="diamond-emblem-img" />
             <div class="rank-text">
               <span class="crest-tier">DIAMOND II</span>
               <span class="crest-lp">64 LP</span>
@@ -93,10 +94,10 @@ const chatMessages = [
       <div class="col col-rs">
         <div class="rs-window">
           <div class="rs-header">
-            <img src="/gaming/osrs-logo.png" alt="Old School RuneScape" class="rs-logo-img" />
+            <img src={`${base}gaming/osrs-logo.png`} alt="Old School RuneScape" class="rs-logo-img" />
           </div>
           <div class="rs-scene">
-            <img src="/gaming/varrock-palace.png" alt="Varrock Palace" class="varrock-img" />
+            <img src={`${base}gaming/varrock-palace.png`} alt="Varrock Palace" class="varrock-img" />
           </div>
           <div class="rs-location">World 302 &mdash; Varrock</div>
           <div class="chat-box">
