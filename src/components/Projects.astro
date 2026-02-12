@@ -1,0 +1,188 @@
+---
+const projectPhotos = [
+  '/projects/f8882f46-e66a-497f-88a2-014fdf381777.jpeg',
+  '/projects/PXL_20250121_202121469.jpg',
+  '/projects/PXL_20250521_020142662.MP.jpg',
+  '/projects/PXL_20250806_143445597.jpg',
+];
+---
+
+<section id="projects" class="section projects-section">
+  <div class="container">
+    <h2 class="section-title projects-title">PROJECTS</h2>
+
+    <div class="carousel" data-projects-carousel>
+      <div class="carousel-viewport">
+        {projectPhotos.map((src, i) => (
+          <div class={`slide ${i === 0 ? 'active' : ''}`} data-slide={i}>
+            <img src={src} alt={`Project photo ${i + 1}`} loading="lazy" />
+          </div>
+        ))}
+      </div>
+
+      <button class="btn-prev" aria-label="Previous">◀</button>
+      <button class="btn-next" aria-label="Next">▶</button>
+
+      <div class="dots">
+        {projectPhotos.map((_, i) => (
+          <button class={`dot ${i === 0 ? 'active' : ''}`} data-dot={i} aria-label={`Project ${i + 1}`} />
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects-section {
+    background-color: #F0EDE8;
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 39px,
+        rgba(0, 0, 0, 0.04) 39px,
+        rgba(0, 0, 0, 0.04) 40px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 39px,
+        rgba(0, 0, 0, 0.04) 39px,
+        rgba(0, 0, 0, 0.04) 40px
+      );
+  }
+
+  .projects-title {
+    color: var(--blue);
+  }
+
+  /* Carousel */
+  .carousel {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .carousel-viewport {
+    position: relative;
+    border: var(--border-thick);
+    box-shadow: var(--shadow-boxy);
+    background: #fff;
+    overflow: hidden;
+    height: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  .slide.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .slide img {
+    display: block;
+    max-height: 488px;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+
+  /* Nav buttons */
+  .btn-prev,
+  .btn-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--bg-gray);
+    border: var(--border-thin);
+    box-shadow: var(--shadow-boxy-sm);
+    padding: 10px 14px;
+    font-size: 20px;
+    cursor: pointer;
+    font-family: var(--font-body);
+    z-index: 5;
+    line-height: 1;
+  }
+
+  .btn-prev:hover,
+  .btn-next:hover {
+    background: #D4D0C8;
+  }
+
+  .btn-prev:active,
+  .btn-next:active {
+    box-shadow: none;
+    transform: translateY(-50%) translate(2px, 2px);
+  }
+
+  .btn-prev { left: -22px; }
+  .btn-next { right: -22px; }
+
+  /* Dots */
+  .dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .dot {
+    width: 14px;
+    height: 14px;
+    border: var(--border-thin);
+    background: var(--bg-gray);
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .dot.active {
+    background: var(--blue);
+  }
+
+  @media (max-width: 640px) {
+    .carousel-viewport { height: 400px; }
+    .slide img { max-height: 368px; }
+    .btn-prev { left: -10px; }
+    .btn-next { right: -10px; }
+    .btn-prev, .btn-next { padding: 8px 10px; font-size: 16px; }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('[data-projects-carousel]').forEach((el) => {
+      const slides = el.querySelectorAll('.slide');
+      const dots = el.querySelectorAll('.dot');
+      const prevBtn = el.querySelector('.btn-prev');
+      const nextBtn = el.querySelector('.btn-next');
+      let current = 0;
+      const total = slides.length;
+
+      function goTo(index: number) {
+        slides[current].classList.remove('active');
+        dots[current].classList.remove('active');
+        current = ((index % total) + total) % total;
+        slides[current].classList.add('active');
+        dots[current].classList.add('active');
+      }
+
+      prevBtn?.addEventListener('click', () => goTo(current - 1));
+      nextBtn?.addEventListener('click', () => goTo(current + 1));
+      dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+    });
+  });
+</script>

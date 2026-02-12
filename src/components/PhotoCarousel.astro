@@ -1,0 +1,217 @@
+---
+interface Props {
+  id: string;
+  items: { label: string; color: string }[];
+}
+const { id, items } = Astro.props;
+---
+
+<div class="carousel" data-carousel={id}>
+  <div class="carousel-track-container">
+    <div class="carousel-track">
+      {items.map((item, i) => (
+        <div class="carousel-slide">
+          <div class="polaroid">
+            <div class="photo-placeholder" style={`background:${item.color}`}>
+              <span class="placeholder-text">{item.label}</span>
+            </div>
+            <div class="polaroid-caption">{item.label}</div>
+            <div class="tape tape-left"></div>
+            <div class="tape tape-right"></div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <button class="carousel-btn carousel-prev" aria-label="Previous">◀</button>
+  <button class="carousel-btn carousel-next" aria-label="Next">▶</button>
+
+  <div class="carousel-dots">
+    {items.map((_, i) => (
+      <button
+        class={`carousel-dot ${i === 0 ? 'active' : ''}`}
+        data-index={i}
+        aria-label={`Go to slide ${i + 1}`}
+      />
+    ))}
+  </div>
+</div>
+
+<style>
+  .carousel {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .carousel-track-container {
+    overflow: hidden;
+    border: var(--border-thick);
+    background: #FFF8F0;
+    box-shadow: var(--shadow-boxy);
+  }
+
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+
+  .carousel-slide {
+    min-width: 100%;
+    padding: 32px 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Polaroid */
+  .polaroid {
+    background: white;
+    padding: 12px 12px 40px;
+    border: 2px solid #ccc;
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.15);
+    position: relative;
+    transform: rotate(-2deg);
+    max-width: 320px;
+    width: 100%;
+  }
+
+  .polaroid:hover {
+    transform: rotate(0deg);
+  }
+
+  .photo-placeholder {
+    width: 100%;
+    aspect-ratio: 4/3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ddd;
+  }
+
+  .placeholder-text {
+    font-family: var(--font-ui);
+    font-size: 14px;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    text-align: center;
+    padding: 8px;
+  }
+
+  .polaroid-caption {
+    font-family: var(--font-body);
+    font-size: 20px;
+    text-align: center;
+    margin-top: 8px;
+    color: #555;
+  }
+
+  /* Tape strips */
+  .tape {
+    position: absolute;
+    width: 60px;
+    height: 20px;
+    background: rgba(255, 215, 0, 0.5);
+    border: 1px solid rgba(200, 170, 0, 0.3);
+    top: -10px;
+  }
+
+  .tape-left {
+    left: 20px;
+    transform: rotate(-5deg);
+  }
+
+  .tape-right {
+    right: 20px;
+    transform: rotate(5deg);
+  }
+
+  /* Nav buttons */
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--bg-gray);
+    border: var(--border-thin);
+    box-shadow: var(--shadow-boxy-sm);
+    padding: 8px 12px;
+    font-size: 18px;
+    cursor: pointer;
+    font-family: var(--font-body);
+    z-index: 5;
+  }
+
+  .carousel-btn:hover {
+    background: #D4D0C8;
+  }
+
+  .carousel-btn:active {
+    box-shadow: none;
+    transform: translateY(-50%) translate(2px, 2px);
+  }
+
+  .carousel-prev { left: -20px; }
+  .carousel-next { right: -20px; }
+
+  /* Dots */
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .carousel-dot {
+    width: 14px;
+    height: 14px;
+    border: var(--border-thin);
+    background: var(--bg-gray);
+    cursor: pointer;
+  }
+
+  .carousel-dot.active {
+    background: var(--red);
+  }
+
+  @media (max-width: 640px) {
+    .carousel-prev { left: -8px; }
+    .carousel-next { right: -8px; }
+    .carousel-btn {
+      padding: 6px 8px;
+      font-size: 14px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('[data-carousel]').forEach((carousel) => {
+      const track = carousel.querySelector('.carousel-track') as HTMLElement;
+      const slides = carousel.querySelectorAll('.carousel-slide');
+      const prevBtn = carousel.querySelector('.carousel-prev');
+      const nextBtn = carousel.querySelector('.carousel-next');
+      const dots = carousel.querySelectorAll('.carousel-dot');
+      let current = 0;
+      const total = slides.length;
+
+      function goTo(index: number) {
+        current = ((index % total) + total) % total;
+        track.style.transform = `translateX(-${current * 100}%)`;
+        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      }
+
+      prevBtn?.addEventListener('click', () => goTo(current - 1));
+      nextBtn?.addEventListener('click', () => goTo(current + 1));
+      dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+
+      // Auto-advance every 5 seconds
+      let autoplay = setInterval(() => goTo(current + 1), 5000);
+      carousel.addEventListener('mouseenter', () => clearInterval(autoplay));
+      carousel.addEventListener('mouseleave', () => {
+        autoplay = setInterval(() => goTo(current + 1), 5000);
+      });
+    });
+  });
+</script>

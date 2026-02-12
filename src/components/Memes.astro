@@ -1,0 +1,224 @@
+---
+const memes = [
+  { src: '/memes/7r1cjk.jpg', type: 'image' },
+  { src: '/memes/cheese-comes-with-a-price-v0-6793wtxjqmga1.webp', type: 'image' },
+  { src: '/memes/chuck-e-got-arrested-at-my-local-chuck-e-cheese-v0-lf95abhkbtef1.jpeg', type: 'image' },
+  { src: '/memes/meme.webp', type: 'image' },
+  { src: '/memes/image.png', type: 'image' },
+  { src: '/memes/3vvv9rja4x9b1.mp4', type: 'video' },
+  { src: '/memes/m2-res_1080p.mp4', type: 'video' },
+];
+---
+
+<section id="memes" class="section memes-section">
+  <div class="container">
+    <h2 class="section-title memes-title">
+      <span class="meme-star">★</span> MEMES <span class="meme-star">★</span>
+    </h2>
+    <p class="memes-subtitle">A curated collection of fine internet art</p>
+
+    <div class="meme-carousel" data-meme-carousel>
+      <div class="meme-track-container">
+        <div class="meme-track">
+          {memes.map((meme, i) => (
+            <div class="meme-slide">
+              {meme.type === 'image' ? (
+                <img src={meme.src} alt={`Meme ${i + 1}`} class="meme-media" loading="lazy" />
+              ) : (
+                <video src={meme.src} class="meme-media" controls muted loop playsinline></video>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <button class="carousel-btn carousel-prev" aria-label="Previous">◀</button>
+      <button class="carousel-btn carousel-next" aria-label="Next">▶</button>
+
+      <div class="carousel-dots">
+        {memes.map((_, i) => (
+          <button
+            class={`carousel-dot ${i === 0 ? 'active' : ''}`}
+            data-index={i}
+            aria-label={`Go to meme ${i + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+
+    <div class="meme-counter">
+      <span class="counter-text">Meme database: {memes.length} / ∞ loaded</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .memes-section {
+    background-color: #1A1A2E;
+    background-image:
+      radial-gradient(circle, #2A2A4E 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .memes-title {
+    color: var(--yellow);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+  }
+
+  .meme-star {
+    color: var(--red);
+    animation: spin-star 4s linear infinite;
+    display: inline-block;
+  }
+
+  .meme-star:last-child {
+    animation-direction: reverse;
+  }
+
+  @keyframes spin-star {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .memes-subtitle {
+    font-family: var(--font-body);
+    font-size: 22px;
+    color: #888;
+    text-align: center;
+    margin-bottom: 32px;
+    font-style: italic;
+  }
+
+  /* Carousel */
+  .meme-carousel {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .meme-track-container {
+    overflow: hidden;
+    border: 4px solid var(--yellow);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.15), 6px 6px 0 #000;
+    background: #111;
+  }
+
+  .meme-track {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+
+  .meme-slide {
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    min-height: 300px;
+  }
+
+  .meme-media {
+    max-width: 100%;
+    max-height: 500px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* Nav buttons */
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #222;
+    border: 2px solid var(--yellow);
+    color: var(--yellow);
+    padding: 8px 12px;
+    font-size: 18px;
+    cursor: pointer;
+    font-family: var(--font-body);
+    z-index: 5;
+    box-shadow: 3px 3px 0 #000;
+  }
+
+  .carousel-btn:hover {
+    background: #333;
+  }
+
+  .carousel-btn:active {
+    box-shadow: none;
+    transform: translateY(-50%) translate(2px, 2px);
+  }
+
+  .carousel-prev { left: -20px; }
+  .carousel-next { right: -20px; }
+
+  /* Dots */
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .carousel-dot {
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--yellow);
+    background: #333;
+    cursor: pointer;
+  }
+
+  .carousel-dot.active {
+    background: var(--yellow);
+  }
+
+  .meme-counter {
+    text-align: center;
+    margin-top: 24px;
+  }
+
+  .counter-text {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    color: #555;
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 640px) {
+    .carousel-prev { left: -8px; }
+    .carousel-next { right: -8px; }
+    .carousel-btn {
+      padding: 6px 8px;
+      font-size: 14px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('[data-meme-carousel]').forEach((carousel) => {
+      const track = carousel.querySelector('.meme-track') as HTMLElement;
+      const slides = carousel.querySelectorAll('.meme-slide');
+      const prevBtn = carousel.querySelector('.carousel-prev');
+      const nextBtn = carousel.querySelector('.carousel-next');
+      const dots = carousel.querySelectorAll('.carousel-dot');
+      let current = 0;
+      const total = slides.length;
+
+      function goTo(index: number) {
+        // Pause any playing videos in the current slide
+        const currentVideos = slides[current].querySelectorAll('video');
+        currentVideos.forEach((v) => (v as HTMLVideoElement).pause());
+
+        current = ((index % total) + total) % total;
+        track.style.transform = `translateX(-${current * 100}%)`;
+        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      }
+
+      prevBtn?.addEventListener('click', () => goTo(current - 1));
+      nextBtn?.addEventListener('click', () => goTo(current + 1));
+      dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+    });
+  });
+</script>

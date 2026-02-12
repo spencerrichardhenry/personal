@@ -1,0 +1,281 @@
+---
+---
+
+<section id="hero" class="section hero">
+  <div class="stars">
+    <div class="star" style="top:10%;left:5%;animation-delay:0s">✦</div>
+    <div class="star" style="top:20%;left:85%;animation-delay:0.5s">★</div>
+    <div class="star" style="top:60%;left:15%;animation-delay:1s">✦</div>
+    <div class="star" style="top:40%;left:90%;animation-delay:1.5s">★</div>
+    <div class="star" style="top:75%;left:50%;animation-delay:2s">✦</div>
+    <div class="star" style="top:15%;left:45%;animation-delay:0.8s">★</div>
+    <div class="star" style="top:85%;left:75%;animation-delay:1.2s">✦</div>
+    <div class="star" style="top:50%;left:30%;animation-delay:0.3s">★</div>
+  </div>
+
+  <div class="hero-content">
+    <div class="welcome-badge boxy-box">
+      <span class="badge-text">★ WELCOME TO ME ★</span>
+    </div>
+
+    <h1 class="hero-title">
+      <span class="typewriter">Hello, I'm Spencer Henry</span>
+      <span class="cursor">_</span>
+    </h1>
+
+    <div class="marquee-container">
+      <div class="marquee-track">
+        <span class="marquee-text">
+          ★ Neuroscience Enthusiast ★ Gamer ★ Sports Fan ★ Builder of Cool Things ★ Retro Web Lover ★ Neuroscience Enthusiast ★ Gamer ★ Sports Fan ★ Builder of Cool Things ★ Retro Web Lover ★
+        </span>
+      </div>
+    </div>
+
+    <div class="hero-badges">
+      <span class="badge badge-red">NEUROSCIENCE</span>
+      <span class="badge badge-blue">GAMING</span>
+      <span class="badge badge-green">SPORTS</span>
+      <span class="badge badge-yellow">EXPLORER</span>
+    </div>
+
+    <div class="visitor-counter boxy-box-sm">
+      <span class="counter-label">You are visitor #</span>
+      <span class="counter-num">001,337</span>
+    </div>
+
+    <div class="guestbook-link">
+      <span>[ </span>
+      <a href="#career" class="retro-link">Sign my Guestbook!</a>
+      <span> ]</span>
+    </div>
+  </div>
+
+  <div class="scroll-arrow">
+    <span>▼</span>
+  </div>
+</section>
+
+<style>
+  .hero {
+    background-color: var(--bg-light);
+    background-image:
+      linear-gradient(45deg, #e8e0d4 25%, transparent 25%),
+      linear-gradient(-45deg, #e8e0d4 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, #e8e0d4 75%),
+      linear-gradient(-45deg, transparent 75%, #e8e0d4 75%);
+    background-size: 40px 40px;
+    background-position: 0 0, 0 20px, 20px -20px, -20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  /* Welcome badge */
+  .welcome-badge {
+    background: var(--yellow);
+    border: var(--border-thick);
+    padding: 8px 24px;
+    animation: pulse-badge 2s ease-in-out infinite;
+  }
+
+  .badge-text {
+    font-family: var(--font-heading);
+    font-size: clamp(8px, 1.5vw, 12px);
+    color: #222;
+    letter-spacing: 2px;
+  }
+
+  @keyframes pulse-badge {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  /* Typewriter */
+  .hero-title {
+    font-family: var(--font-heading);
+    font-size: clamp(16px, 4vw, 36px);
+    color: #222;
+    line-height: 1.4;
+  }
+
+  .typewriter {
+    display: inline;
+    border-right: none;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typewriter 2.5s steps(25, end) forwards;
+    max-width: 0;
+    display: inline-block;
+    vertical-align: bottom;
+  }
+
+  @keyframes typewriter {
+    from { max-width: 0; }
+    to { max-width: 100%; }
+  }
+
+  .cursor {
+    font-family: var(--font-heading);
+    color: var(--red);
+    animation: blink-cursor 0.8s step-end infinite;
+  }
+
+  @keyframes blink-cursor {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* Marquee */
+  .marquee-container {
+    width: 100%;
+    max-width: 600px;
+    overflow: hidden;
+    border: var(--border-thin);
+    background: var(--bg-white);
+    padding: 6px 0;
+  }
+
+  .marquee-track {
+    display: flex;
+    animation: marquee-scroll 20s linear infinite;
+  }
+
+  .marquee-text {
+    font-family: var(--font-body);
+    font-size: 20px;
+    color: var(--blue);
+    white-space: nowrap;
+    padding-right: 40px;
+  }
+
+  @keyframes marquee-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* Badges */
+  .hero-badges {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .badge {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    padding: 6px 14px;
+    border: var(--border-thin);
+    box-shadow: var(--shadow-boxy-sm);
+    font-weight: 700;
+  }
+
+  .badge-red { background: var(--red); color: white; }
+  .badge-blue { background: var(--blue); color: white; }
+  .badge-green { background: var(--green); color: white; }
+  .badge-yellow { background: var(--yellow); color: #222; }
+
+  /* Visitor counter */
+  .visitor-counter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #222;
+    color: var(--green);
+    font-family: var(--font-body);
+    font-size: 20px;
+  }
+
+  .counter-num {
+    color: var(--yellow);
+    font-weight: bold;
+  }
+
+  /* Guestbook link */
+  .guestbook-link {
+    font-family: var(--font-body);
+    font-size: 22px;
+    color: #666;
+  }
+
+  .retro-link {
+    color: var(--blue);
+    text-decoration: underline;
+  }
+
+  .retro-link:hover {
+    color: var(--red);
+  }
+
+  /* Floating stars */
+  .stars {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .star {
+    position: absolute;
+    font-size: 24px;
+    color: var(--yellow);
+    animation: float-star 3s ease-in-out infinite;
+  }
+
+  .star:nth-child(even) {
+    color: var(--red);
+  }
+
+  @keyframes float-star {
+    0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+    50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+  }
+
+  /* Scroll arrow */
+  .scroll-arrow {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 28px;
+    color: var(--blue);
+    animation: bounce-arrow 1.5s ease-in-out infinite;
+    z-index: 2;
+  }
+
+  @keyframes bounce-arrow {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(15px); }
+  }
+
+  /* Under construction */
+  .construction {
+    position: absolute;
+    bottom: 8px;
+    font-family: var(--font-ui);
+    font-size: 11px;
+    color: #999;
+    z-index: 2;
+  }
+
+  @media (max-width: 640px) {
+    .hero-badges {
+      gap: 8px;
+    }
+    .badge {
+      font-size: 10px;
+      padding: 4px 10px;
+    }
+  }
+</style>

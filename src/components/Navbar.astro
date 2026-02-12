@@ -1,0 +1,133 @@
+---
+const links = [
+  { href: '#hero', label: 'Home' },
+  { href: '#family', label: 'Family' },
+  { href: '#sports', label: 'Sports' },
+  { href: '#gaming', label: 'Gaming' },
+  { href: '#hobbies', label: 'Hobbies' },
+  { href: '#projects', label: 'Projects' },
+  { href: '#neuro', label: 'Neuro' },
+  { href: '#career', label: 'Career' },
+  { href: '#memes', label: 'Memes' },
+];
+---
+
+<nav class="taskbar">
+  <div class="taskbar-inner">
+    <a href="#hero" class="start-btn win95-raised">
+      <span class="start-icon">▶</span>
+      <span class="start-text">Start</span>
+    </a>
+    <div class="taskbar-divider"></div>
+    <div class="taskbar-links">
+      {links.map((link) => (
+        <a href={link.href} class="taskbar-btn win95-raised">
+          {link.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</nav>
+
+<style>
+  .taskbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--bg-gray);
+    border-bottom: 2px solid var(--win95-dark-shadow);
+    border-top: 2px solid var(--win95-highlight);
+    height: 44px;
+    display: flex;
+    align-items: center;
+    padding: 0 4px;
+  }
+
+  .taskbar-inner {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .taskbar-inner::-webkit-scrollbar {
+    height: 0;
+  }
+
+  .start-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    background: var(--bg-gray);
+    font-family: var(--font-ui);
+    font-size: 12px;
+    cursor: pointer;
+    white-space: nowrap;
+    height: 32px;
+    font-weight: 700;
+  }
+
+  .start-btn:active {
+    border-top: 2px solid var(--win95-dark-shadow);
+    border-left: 2px solid var(--win95-dark-shadow);
+    border-bottom: 2px solid var(--win95-highlight);
+    border-right: 2px solid var(--win95-highlight);
+  }
+
+  .start-icon {
+    color: var(--green);
+    font-size: 10px;
+  }
+
+  .taskbar-divider {
+    width: 2px;
+    height: 28px;
+    background: var(--win95-shadow);
+    border-right: 1px solid var(--win95-highlight);
+    flex-shrink: 0;
+  }
+
+  .taskbar-links {
+    display: flex;
+    gap: 2px;
+    align-items: center;
+  }
+
+  .taskbar-btn {
+    padding: 2px 10px;
+    background: var(--bg-gray);
+    font-family: var(--font-ui);
+    font-size: 11px;
+    cursor: pointer;
+    white-space: nowrap;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    transition: none;
+  }
+
+  .taskbar-btn:hover {
+    background: #D4D0C8;
+  }
+
+  .taskbar-btn:active {
+    border-top: 2px solid var(--win95-dark-shadow);
+    border-left: 2px solid var(--win95-dark-shadow);
+    border-bottom: 2px solid var(--win95-highlight);
+    border-right: 2px solid var(--win95-highlight);
+  }
+
+  @media (max-width: 640px) {
+    .start-text {
+      display: none;
+    }
+    .taskbar-btn {
+      font-size: 10px;
+      padding: 2px 6px;
+    }
+  }
+</style>

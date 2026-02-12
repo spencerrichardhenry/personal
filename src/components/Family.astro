@@ -1,0 +1,307 @@
+---
+const familyPhotos = [
+  '/family/d3451ed2-50e6-4711-85c5-f3d0940789ff.jpeg',
+  '/family/905a7a21-b79b-48c6-8d55-c1bacc018af9.jpeg',
+  '/family/PXL_20250816_142257172.MP.jpg',
+  '/family/PXL_20260123_154445507.MP.jpg',
+  '/family/PXL_20260131_034353774.jpg',
+  '/family/PXL_20260207_194850461.MP.jpg',
+];
+---
+
+<section id="family" class="section family-section">
+  <div class="container">
+    <div class="scrapbook-header">
+      <div class="tape-deco tape-deco-left"></div>
+      <h2 class="section-title family-title">📷 Family Album 📷</h2>
+      <div class="tape-deco tape-deco-right"></div>
+    </div>
+
+    <p class="family-intro">
+      Welcome to the Henry family scrapbook! Flip through some of our favorite moments.
+    </p>
+
+    <div class="carousel" data-family-carousel>
+      <div class="carousel-viewport">
+        {familyPhotos.map((src, i) => (
+          <div class={`slide ${i === 0 ? 'active' : ''}`} data-slide={i}>
+            <div class="polaroid">
+              <img src={src} alt={`Family photo ${i + 1}`} loading="lazy" />
+              <div class="tape tape-left"></div>
+              <div class="tape tape-right"></div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <button class="btn-prev" aria-label="Previous">◀</button>
+      <button class="btn-next" aria-label="Next">▶</button>
+
+      <div class="dots">
+        {familyPhotos.map((_, i) => (
+          <button class={`dot ${i === 0 ? 'active' : ''}`} data-dot={i} aria-label={`Photo ${i + 1}`} />
+        ))}
+      </div>
+    </div>
+
+    <div class="scrapbook-notes">
+      <div class="sticky-note note-1">
+        <p>Best family ever! ♥</p>
+      </div>
+      <div class="sticky-note note-2">
+        <p>Summer 2024 was amazing!</p>
+      </div>
+      <div class="sticky-note note-3">
+        <p>Love these memories</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .family-section {
+    background-color: #FFF8F0;
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 29px,
+        rgba(200, 180, 160, 0.15) 29px,
+        rgba(200, 180, 160, 0.15) 30px
+      );
+  }
+
+  .scrapbook-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+
+  .family-title {
+    color: var(--red);
+    margin-bottom: 0;
+  }
+
+  .tape-deco {
+    width: 80px;
+    height: 24px;
+    background: rgba(255, 215, 0, 0.5);
+    border: 1px solid rgba(200, 170, 0, 0.3);
+  }
+
+  .tape-deco-left { transform: rotate(-3deg); }
+  .tape-deco-right { transform: rotate(3deg); }
+
+  .family-intro {
+    font-family: var(--font-body);
+    font-size: 24px;
+    text-align: center;
+    color: #666;
+    margin-bottom: 32px;
+  }
+
+  /* ===== Carousel ===== */
+  .carousel {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .carousel-viewport {
+    position: relative;
+    border: var(--border-thick);
+    box-shadow: var(--shadow-boxy);
+    background: #FFF8F0;
+    overflow: hidden;
+    /* Fixed height so the carousel doesn't jump between portrait/landscape */
+    height: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  .slide.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .polaroid {
+    background: white;
+    padding: 10px 10px 14px;
+    border: 2px solid #ccc;
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.15);
+    position: relative;
+    transform: rotate(-1.5deg);
+    transition: transform 0.3s ease;
+    max-height: 100%;
+  }
+
+  .polaroid:hover {
+    transform: rotate(0deg);
+  }
+
+  .polaroid img {
+    display: block;
+    max-height: 440px;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .tape {
+    position: absolute;
+    width: 60px;
+    height: 20px;
+    background: rgba(255, 215, 0, 0.5);
+    border: 1px solid rgba(200, 170, 0, 0.3);
+    top: -10px;
+  }
+
+  .tape-left {
+    left: 20px;
+    transform: rotate(-5deg);
+  }
+
+  .tape-right {
+    right: 20px;
+    transform: rotate(5deg);
+  }
+
+  /* Nav buttons */
+  .btn-prev,
+  .btn-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--bg-gray);
+    border: var(--border-thin);
+    box-shadow: var(--shadow-boxy-sm);
+    padding: 10px 14px;
+    font-size: 20px;
+    cursor: pointer;
+    font-family: var(--font-body);
+    z-index: 5;
+    line-height: 1;
+  }
+
+  .btn-prev:hover,
+  .btn-next:hover {
+    background: #D4D0C8;
+  }
+
+  .btn-prev:active,
+  .btn-next:active {
+    box-shadow: none;
+    transform: translateY(-50%) translate(2px, 2px);
+  }
+
+  .btn-prev { left: -22px; }
+  .btn-next { right: -22px; }
+
+  /* Dots */
+  .dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .dot {
+    width: 14px;
+    height: 14px;
+    border: var(--border-thin);
+    background: var(--bg-gray);
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .dot.active {
+    background: var(--red);
+  }
+
+  /* Sticky notes */
+  .scrapbook-notes {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+  }
+
+  .sticky-note {
+    width: 160px;
+    padding: 20px 16px;
+    font-family: var(--font-body);
+    font-size: 20px;
+    text-align: center;
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.1);
+    line-height: 1.4;
+  }
+
+  .note-1 {
+    background: #FFFACD;
+    transform: rotate(-3deg);
+  }
+
+  .note-2 {
+    background: #FFE4E1;
+    transform: rotate(2deg);
+  }
+
+  .note-3 {
+    background: #E0FFE0;
+    transform: rotate(-1deg);
+  }
+
+  @media (max-width: 640px) {
+    .tape-deco { display: none; }
+    .carousel-viewport { height: 400px; }
+    .polaroid img { max-height: 340px; }
+    .btn-prev { left: -10px; }
+    .btn-next { right: -10px; }
+    .btn-prev, .btn-next { padding: 8px 10px; font-size: 16px; }
+    .scrapbook-notes { gap: 12px; }
+    .sticky-note { width: 130px; font-size: 18px; padding: 14px 12px; }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('[data-family-carousel]').forEach((el) => {
+      const slides = el.querySelectorAll('.slide');
+      const dots = el.querySelectorAll('.dot');
+      const prevBtn = el.querySelector('.btn-prev');
+      const nextBtn = el.querySelector('.btn-next');
+      let current = 0;
+      const total = slides.length;
+
+      function goTo(index: number) {
+        slides[current].classList.remove('active');
+        dots[current].classList.remove('active');
+        current = ((index % total) + total) % total;
+        slides[current].classList.add('active');
+        dots[current].classList.add('active');
+      }
+
+      prevBtn?.addEventListener('click', () => goTo(current - 1));
+      nextBtn?.addEventListener('click', () => goTo(current + 1));
+      dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+    });
+  });
+</script>

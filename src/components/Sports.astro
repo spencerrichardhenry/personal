@@ -1,0 +1,279 @@
+---
+const sports = [
+  {
+    name: 'Volleyball',
+    position: 'Net Player',
+    years: '',
+    rating: 62,
+    stats: [
+      { label: 'Blocking', value: 80 },
+      { label: 'Passing', value: 40 },
+      { label: 'Serving', value: 65 },
+    ],
+    quip: '',
+    color: '#FF0040',
+  },
+  {
+    name: 'Tennis',
+    position: 'Baseline',
+    years: '',
+    rating: 45,
+    stats: [
+      { label: 'Backhand', value: 15 },
+      { label: 'Forehand', value: 70 },
+      { label: 'Serving', value: 50 },
+    ],
+    quip: '',
+    color: '#0066FF',
+  },
+  {
+    name: 'Racquetball',
+    position: 'Casual',
+    years: '',
+    rating: 10,
+    stats: [],
+    quip: "Well, I know the rules anyways",
+    color: '#00CC44',
+  },
+];
+---
+
+<section id="sports" class="section sports-section">
+  <div class="container">
+    <div class="scoreboard-title">
+      {'SPORTS'.split('').map((letter) => (
+        <span class="score-letter">{letter}</span>
+      ))}
+    </div>
+
+    <div class="trading-cards">
+      {sports.map((sport) => (
+        <div class="trading-card">
+          <div class="card-top" style={`background:${sport.color}`}>
+            <span class="card-rating">{sport.rating}</span>
+            <div class="card-photo" style={`background:${sport.color}88`}>
+              <span class="card-sport-name">{sport.name}</span>
+            </div>
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">{sport.name}</h3>
+            <div class="card-meta">
+              <span>{sport.position}</span>
+            </div>
+            {sport.stats.length > 0 ? (
+              <table class="stats-table">
+                <tbody>
+                  {sport.stats.map((stat) => (
+                    <tr>
+                      <td class="stat-label">{stat.label}</td>
+                      <td class="stat-bar-cell">
+                        <div class="stat-bar">
+                          <div class="stat-fill" style={`width:${stat.value}%;background:${sport.color}`}></div>
+                        </div>
+                      </td>
+                      <td class="stat-value">{stat.value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              <p class="card-quip">{sport.quip}</p>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="sports-footer">
+      <span class="footer-badge">⚡ ALL-STAR COLLECTION ⚡</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .sports-section {
+    background-color: #FFFFFF;
+    background-image:
+      repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 20px,
+        #F8F4F0 20px,
+        #F8F4F0 22px
+      );
+  }
+
+  .scoreboard-title {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 40px;
+  }
+
+  .score-letter {
+    font-family: var(--font-heading);
+    font-size: clamp(18px, 3vw, 32px);
+    width: clamp(36px, 5vw, 52px);
+    height: clamp(36px, 5vw, 52px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: var(--border-thick);
+    background: var(--bg-white);
+    box-shadow: var(--shadow-boxy-sm);
+    color: var(--red);
+  }
+
+  .score-letter:nth-child(even) {
+    color: var(--blue);
+  }
+
+  .trading-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 28px;
+  }
+
+  .trading-card {
+    border: 4px solid #222;
+    box-shadow: var(--shadow-boxy);
+    background: white;
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+
+  .trading-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .card-top {
+    padding: 16px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 180px;
+  }
+
+  .card-rating {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-family: var(--font-heading);
+    font-size: 24px;
+    color: white;
+    background: #222;
+    border: 2px solid white;
+    padding: 4px 10px;
+    text-shadow: none;
+  }
+
+  .card-photo {
+    width: 140px;
+    height: 140px;
+    border: 3px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-sport-name {
+    font-family: var(--font-ui);
+    font-size: 14px;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  }
+
+  .card-info {
+    padding: 16px;
+    border-top: 3px solid #222;
+  }
+
+  .card-title {
+    font-family: var(--font-heading);
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .card-meta {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-body);
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 12px;
+  }
+
+  .stats-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .stats-table td {
+    padding: 4px 0;
+    font-family: var(--font-body);
+    font-size: 18px;
+  }
+
+  .stat-label {
+    width: 80px;
+    color: #555;
+  }
+
+  .stat-bar-cell {
+    width: 100%;
+  }
+
+  .stat-bar {
+    height: 16px;
+    background: #eee;
+    border: 2px solid #222;
+    position: relative;
+  }
+
+  .stat-fill {
+    height: 100%;
+    transition: width 1s ease;
+  }
+
+  .stat-value {
+    width: 40px;
+    text-align: right;
+    font-weight: bold;
+    font-family: var(--font-heading);
+    font-size: 10px;
+  }
+
+  .card-quip {
+    font-family: var(--font-body);
+    font-size: 22px;
+    color: #555;
+    text-align: center;
+    font-style: italic;
+    padding: 16px 0;
+  }
+
+  .sports-footer {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .footer-badge {
+    font-family: var(--font-heading);
+    font-size: clamp(8px, 1.5vw, 12px);
+    color: var(--yellow);
+    background: #222;
+    padding: 8px 20px;
+    border: var(--border-thin);
+    display: inline-block;
+  }
+
+  @media (max-width: 640px) {
+    .trading-cards {
+      grid-template-columns: 1fr;
+    }
+    .scoreboard-title {
+      gap: 4px;
+    }
+  }
+</style>

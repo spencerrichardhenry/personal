@@ -1,0 +1,550 @@
+---
+const champions = [
+  { name: 'Shaco', mastery: '718,670', level: 10, role: 'Support / Jungle', icon: '/gaming/shaco-icon.png' },
+  { name: 'Pyke', mastery: '101,962', level: 12, role: 'Support', icon: '/gaming/pyke-icon.png' },
+  { name: 'Thresh', mastery: '101,905', level: 12, role: 'Support', icon: '/gaming/thresh-icon.png' },
+  { name: 'Aurora', mastery: '92,761', level: 11, role: 'Mid / Support', icon: '/gaming/aurora-icon.png' },
+];
+
+const chatMessages = [
+  { user: 'xXNoob_Slayer99Xx', msg: 'dude how do you type so fast' },
+  { user: 'Spencer', msg: 'I learned on the streets, kid' },
+  { user: 'Spencer', msg: '-- the streets of Varrock' },
+];
+---
+
+<section id="gaming" class="section gaming-section">
+  <div class="gaming-container">
+    <h2 class="gaming-title">&#9876; Gaming Zone &#9876;</h2>
+
+    <div class="gaming-columns">
+      <!-- LEFT: MapleStory -->
+      <div class="col col-maple">
+        <div class="maple-window">
+          <div class="maple-header">
+            <img src="/gaming/maplestory-logo.png" alt="MapleStory" class="maple-logo-img" />
+          </div>
+          <div class="maple-scene">
+            <img src="/gaming/maple-mushroom.png" alt="Orange Mushroom" class="maple-mushroom-img" />
+          </div>
+          <div class="maple-body">
+            <p class="maple-text">Before there was League, there was MapleStory.</p>
+            <p class="maple-sub">Countless hours in Henesys, party questing with strangers, and mostly just a glorified instant messenger</p>
+            <div class="maple-badge">Ice/Lightning Mage</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CENTER: League of Legends -->
+      <div class="col col-lol">
+        <div class="lol-window">
+          <div class="lol-header">
+            <img src="/gaming/lol-logo.png" alt="League of Legends" class="lol-logo-img" />
+            <span class="lol-summoner">operatingcan #NA1</span>
+          </div>
+
+          <!-- Rank emblem -->
+          <div class="rank-row">
+            <img src="/gaming/diamond-emblem.png" alt="Diamond" class="diamond-emblem-img" />
+            <div class="rank-text">
+              <span class="crest-tier">DIAMOND II</span>
+              <span class="crest-lp">64 LP</span>
+            </div>
+          </div>
+
+          <div class="lol-stats-grid">
+            <div class="lol-stat-box">
+              <span class="lol-stat-num">26W 27L</span>
+              <span class="lol-stat-label">Record</span>
+            </div>
+            <div class="lol-stat-box">
+              <span class="lol-stat-num">49%</span>
+              <span class="lol-stat-label">Win Rate</span>
+            </div>
+            <div class="lol-stat-box highlight-box">
+              <span class="lol-stat-num">Top 1.53%</span>
+              <span class="lol-stat-label">Ladder</span>
+            </div>
+            <div class="lol-stat-box">
+              <span class="lol-stat-num">Emerald 1</span>
+              <span class="lol-stat-label">Flex Queue</span>
+            </div>
+          </div>
+
+          <div class="champ-section">
+            <h3 class="champ-heading">Champion Mastery</h3>
+            <div class="champ-grid">
+              {champions.map((champ) => (
+                <div class="champ-card">
+                  <img src={champ.icon} alt={champ.name} class="champ-icon-img" />
+                  <div class="champ-info">
+                    <span class="champ-name">{champ.name}</span>
+                    <span class="champ-detail">{champ.role}</span>
+                    <span class="champ-pts">{champ.mastery} pts</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: RuneScape -->
+      <div class="col col-rs">
+        <div class="rs-window">
+          <div class="rs-header">
+            <img src="/gaming/osrs-logo.png" alt="Old School RuneScape" class="rs-logo-img" />
+          </div>
+          <div class="rs-scene">
+            <img src="/gaming/varrock-palace.png" alt="Varrock Palace" class="varrock-img" />
+          </div>
+          <div class="rs-location">World 302 &mdash; Varrock</div>
+          <div class="chat-box">
+            <div class="chat-messages">
+              {chatMessages.map((msg) => (
+                <div class="chat-line">
+                  <span class={`chat-user ${msg.user === 'Spencer' ? 'chat-self' : ''}`}>
+                    {msg.user}:
+                  </span>
+                  {' '}{msg.msg}
+                </div>
+              ))}
+            </div>
+            <div class="chat-input">
+              <span class="chat-prompt">&gt;</span>
+              <span class="chat-cursor">|</span>
+            </div>
+          </div>
+          <p class="rs-aside">Where I learned to type 120 WPM before age 12</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .gaming-section {
+    background-color: #0A1428;
+    background-image:
+      radial-gradient(ellipse at 20% 50%, rgba(30, 50, 80, 0.5) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 50%, rgba(30, 50, 80, 0.3) 0%, transparent 60%);
+  }
+
+  .gaming-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  .gaming-title {
+    font-family: var(--font-heading);
+    font-size: clamp(14px, 2.5vw, 22px);
+    color: #C8AA6E;
+    text-shadow: 0 0 12px rgba(200, 170, 110, 0.3);
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  /* ===== 3-column layout ===== */
+  .gaming-columns {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+
+  .col { min-width: 0; }
+
+  /* ===========================
+     MAPLESTORY (left)
+     =========================== */
+  .maple-window {
+    background: #FFF8EE;
+    border: 3px solid #FF9900;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(255, 153, 0, 0.2);
+  }
+
+  .maple-header {
+    background: linear-gradient(135deg, #FF9900, #FFB740);
+    padding: 10px 12px;
+    border-bottom: 2px solid #E68A00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .maple-logo-img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(1px 1px 0 #CC7700);
+  }
+
+  .maple-scene {
+    position: relative;
+    height: 140px;
+    background: linear-gradient(180deg, #87CEEB, #B0E0FF 70%, #66BB44 70%, #448833);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .maple-mushroom-img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    image-rendering: pixelated;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+    animation: mushroom-bounce 2s ease-in-out infinite;
+  }
+
+  @keyframes mushroom-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  .maple-body {
+    padding: 12px;
+    text-align: center;
+  }
+
+  .maple-text {
+    font-family: var(--font-body);
+    font-size: 17px;
+    color: #664400;
+    margin-bottom: 6px;
+    font-weight: bold;
+  }
+
+  .maple-sub {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: #886633;
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+
+  .maple-badge {
+    display: inline-block;
+    font-family: var(--font-ui);
+    font-size: 10px;
+    color: #FFF;
+    background: linear-gradient(135deg, #FF9900, #CC6600);
+    padding: 4px 10px;
+    border: 1px solid #CC6600;
+    border-radius: 4px;
+  }
+
+  /* ===========================
+     LEAGUE OF LEGENDS (center)
+     =========================== */
+  .lol-window {
+    background: #0E1A2B;
+    border: 2px solid #C8AA6E;
+    box-shadow:
+      0 0 20px rgba(200, 170, 110, 0.1),
+      inset 0 0 40px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+  }
+
+  .lol-header {
+    background: linear-gradient(90deg, #1A2A42, #0E1A2B);
+    padding: 6px 12px;
+    border-bottom: 1px solid #C8AA6E44;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .lol-logo-img {
+    height: 32px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .lol-summoner {
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: #5B7A8A;
+  }
+
+  /* Rank emblem row */
+  .rank-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 10px 16px;
+  }
+
+  .diamond-emblem-img {
+    width: 100px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 12px rgba(91, 141, 239, 0.4));
+  }
+
+  .rank-text {
+    text-align: left;
+  }
+
+  .crest-tier {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 12px;
+    color: #5B8DEF;
+    letter-spacing: 2px;
+    text-shadow: 0 0 8px rgba(91, 141, 239, 0.5);
+  }
+
+  .crest-lp {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 18px;
+    color: #C8AA6E;
+    text-shadow: 0 0 6px rgba(200, 170, 110, 0.4);
+  }
+
+  /* Stats grid */
+  .lol-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    padding: 8px 12px;
+  }
+
+  .lol-stat-box {
+    background: #162030;
+    border: 1px solid #2A3A50;
+    padding: 6px 6px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .lol-stat-num {
+    font-family: var(--font-body);
+    font-size: 18px;
+    color: #C8C0E0;
+  }
+
+  .lol-stat-label {
+    font-family: var(--font-ui);
+    font-size: 9px;
+    color: #5B7A8A;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .highlight-box {
+    border-color: #C8AA6E44;
+  }
+
+  .highlight-box .lol-stat-num {
+    color: #C8AA6E;
+  }
+
+  /* Champions */
+  .champ-section {
+    padding: 0 12px 8px;
+  }
+
+  .champ-heading {
+    font-family: var(--font-ui);
+    font-size: 10px;
+    color: #5B7A8A;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .champ-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  .champ-card {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    background: #162030;
+    border: 1px solid #2A3A50;
+  }
+
+  .champ-icon-img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border: 2px solid #C8AA6E;
+    flex-shrink: 0;
+  }
+
+  .champ-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+  }
+
+  .champ-name {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    color: #C8C0E0;
+  }
+
+  .champ-detail {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: #5B7A8A;
+  }
+
+  .champ-pts {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: #C8AA6E;
+  }
+
+  .lol-tagline {
+    font-family: var(--font-body);
+    font-size: 20px;
+    color: #5B7A8A;
+    text-align: center;
+    font-style: italic;
+    padding: 4px 12px 10px;
+  }
+
+  /* ===========================
+     RUNESCAPE (right)
+     =========================== */
+  .rs-window {
+    background: #2B2018;
+    border: 3px solid #5C4033;
+    box-shadow:
+      inset 0 0 0 1px #8B7355,
+      0 4px 12px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+  }
+
+  .rs-header {
+    background: linear-gradient(90deg, #5C4033, #7A5A40);
+    padding: 6px 8px;
+    border-bottom: 2px solid #3D2B1F;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .rs-logo-img {
+    height: 32px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .rs-scene {
+    position: relative;
+    height: 120px;
+    overflow: hidden;
+    background: #2A3A2A;
+  }
+
+  .varrock-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    image-rendering: pixelated;
+  }
+
+  .rs-location {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: #FFD700;
+    text-align: center;
+    padding: 8px 0 4px;
+    text-shadow: 1px 1px 0 #000;
+  }
+
+  .chat-box {
+    margin: 4px 8px;
+    background: #1A1510;
+    border: 2px solid #5C4033;
+  }
+
+  .chat-messages {
+    padding: 8px;
+  }
+
+  .chat-line {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: #D4C4A0;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+
+  .chat-user {
+    color: #4488FF;
+  }
+
+  .chat-self {
+    color: #00CC44;
+  }
+
+  .chat-input {
+    padding: 4px 8px;
+    border-top: 2px solid #5C4033;
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: #00CC44;
+  }
+
+  .chat-cursor {
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .rs-aside {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: #8B7355;
+    text-align: center;
+    padding: 8px;
+    font-style: italic;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 900px) {
+    .gaming-columns {
+      grid-template-columns: 1fr 2fr;
+    }
+    .col-lol {
+      grid-column: 1 / -1;
+      order: -1;
+    }
+    .lol-stats-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .gaming-columns {
+      grid-template-columns: 1fr;
+    }
+    .col-lol { order: -1; }
+    .lol-stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .champ-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

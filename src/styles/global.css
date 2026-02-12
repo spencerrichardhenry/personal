@@ -1,0 +1,119 @@
+/* ===== RESET ===== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 48px;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-light);
+  color: #222;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* ===== CSS CUSTOM PROPERTIES ===== */
+:root {
+  /* Accent colors */
+  --red: #FF0040;
+  --blue: #0066FF;
+  --green: #00CC44;
+  --yellow: #FFD700;
+
+  /* Backgrounds */
+  --bg-light: #F5F0E8;
+  --bg-white: #FFFFFF;
+  --bg-gray: #C0C0C0;
+  --bg-teal: #008080;
+  --bg-parchment: #D4C4A0;
+
+  /* Fonts */
+  --font-heading: 'Press Start 2P', cursive;
+  --font-body: 'VT323', monospace;
+  --font-ui: 'Silkscreen', cursive;
+
+  /* Borders */
+  --border-thick: 4px solid #222;
+  --border-thin: 2px solid #222;
+
+  /* Shadows */
+  --shadow-boxy: 6px 6px 0px #222;
+  --shadow-boxy-sm: 3px 3px 0px #222;
+
+  /* Win95 borders */
+  --win95-highlight: #FFFFFF;
+  --win95-shadow: #808080;
+  --win95-dark-shadow: #404040;
+}
+
+/* ===== SHARED CLASSES ===== */
+.section {
+  min-height: 100vh;
+  padding: 80px 24px 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.boxy-box {
+  border: var(--border-thick);
+  box-shadow: var(--shadow-boxy);
+  background: var(--bg-white);
+  padding: 16px;
+}
+
+.boxy-box-sm {
+  border: var(--border-thin);
+  box-shadow: var(--shadow-boxy-sm);
+  background: var(--bg-white);
+  padding: 12px;
+}
+
+/* Win95 raised border effect */
+.win95-raised {
+  border-top: 2px solid var(--win95-highlight);
+  border-left: 2px solid var(--win95-highlight);
+  border-bottom: 2px solid var(--win95-dark-shadow);
+  border-right: 2px solid var(--win95-dark-shadow);
+}
+
+.win95-sunken {
+  border-top: 2px solid var(--win95-dark-shadow);
+  border-left: 2px solid var(--win95-dark-shadow);
+  border-bottom: 2px solid var(--win95-highlight);
+  border-right: 2px solid var(--win95-highlight);
+}
+
+/* Section title shared styling */
+.section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(18px, 3vw, 32px);
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+/* Container */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}

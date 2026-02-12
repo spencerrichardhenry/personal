@@ -1,0 +1,271 @@
+---
+const timeline = [
+  {
+    year: 'Jan 2026 - Present',
+    title: 'Guardian HT — Senior Software Engineer',
+    description: 'Dustin\'s minion, and AI-ifying all our workflows so we can get more done with less',
+    accent: 'var(--green)',
+    current: true,
+  },
+  {
+    year: 'Aug 2024 - Dec 2025',
+    title: 'Quantizr — Principle Software Engineer',
+    description: 'Architected and shipped a niche vertical fintech product, owned the engineering team, and got the whole org leveled up on AI-first coding practices.',
+    accent: 'var(--blue)',
+    current: false,
+  },
+  {
+    year: 'Dec 2021 - Apr 2024',
+    title: 'Qualtrics — Software Engineer',
+    description: 'Spearheaded cataloging thousands of microservices on the Developer Experience team, implementing Backstage OSS to make the org manageable.',
+    accent: 'var(--blue)',
+    current: false,
+  },
+  {
+    year: 'Jun 2019 - Present',
+    title: 'Freelance / Solo Projects — Full-Stack + DevOps',
+    description: 'Built marketplaces, indexed every movie script ever into ElasticSearch, bought and ran a micro SaaS, and shipped CD pipelines for clients.',
+    accent: 'var(--blue)',
+    current: false,
+  },
+  {
+    year: 'Mar 2020 - Dec 2021',
+    title: 'Whistic — Software Engineer',
+    description: 'Shipped fullstack features across SQL, GraphQL, ElasticSearch, and React for clients like Airbnb and Okta.',
+    accent: 'var(--blue)',
+    current: false,
+  },
+  {
+    year: 'May 2019 - Mar 2020',
+    title: 'Cvent — Software Development Engineer in Test',
+    description: 'Cut my teeth in professional software development, building test infrastructure and automation.',
+    accent: 'var(--red)',
+    current: false,
+  },
+];
+
+---
+
+<section id="career" class="section career-section">
+  <div class="container">
+    <!-- DOS prompt title -->
+    <div class="dos-prompt">
+      <span class="dos-path">C:\SPENCER\CAREER&gt;</span>
+      <span class="dos-cmd"> dir</span>
+      <span class="dos-cursor">_</span>
+    </div>
+
+    <div class="dos-output">
+      <p>Volume in drive C is SPENCER_HD</p>
+      <p>Directory of C:\SPENCER\CAREER</p>
+      <br />
+      <p>  RESUME&nbsp;&nbsp;&nbsp;&nbsp;TXT&nbsp;&nbsp;&nbsp;&nbsp;4,096 bytes</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 File(s)&nbsp;&nbsp;&nbsp;&nbsp;4,096 bytes free</p>
+    </div>
+
+    <!-- Timeline -->
+    <h3 class="sub-heading">&gt; RESUME.TXT</h3>
+    <div class="timeline">
+      {timeline.map((item) => (
+        <div class={`timeline-item ${item.current ? 'current' : ''}`}>
+          <div class="timeline-accent" style={`background:${item.accent}`}></div>
+          <div class="timeline-content">
+            <div class="timeline-year">{item.year}</div>
+            <h4 class="timeline-title">{item.title}</h4>
+            <p class="timeline-desc">{item.description}</p>
+            {item.current && <span class="current-badge">CURRENT</span>}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Download button -->
+    <div class="download-area">
+      <button class="download-btn">
+        <span class="btn-icon">💾</span>
+        <span class="btn-text">Download Resume</span>
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .career-section {
+    background-color: #FFFFFF;
+    background-image:
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 59px,
+        rgba(0, 102, 255, 0.06) 59px,
+        rgba(0, 102, 255, 0.06) 60px
+      );
+  }
+
+  /* DOS prompt */
+  .dos-prompt {
+    font-family: var(--font-body);
+    font-size: 28px;
+    margin-bottom: 8px;
+    color: #222;
+  }
+
+  .dos-path {
+    color: var(--blue);
+  }
+
+  .dos-cmd {
+    color: #222;
+  }
+
+  .dos-cursor {
+    animation: blink 1s step-end infinite;
+    color: var(--green);
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .dos-output {
+    font-family: var(--font-body);
+    font-size: 20px;
+    color: #666;
+    padding: 12px 0 24px;
+    border-bottom: 2px dashed #ddd;
+    margin-bottom: 32px;
+  }
+
+  .dos-output p {
+    margin-bottom: 2px;
+  }
+
+  .sub-heading {
+    font-family: var(--font-body);
+    font-size: 26px;
+    color: var(--blue);
+    margin-bottom: 20px;
+    margin-top: 8px;
+  }
+
+  /* Timeline */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 40px;
+    padding-left: 20px;
+    border-left: 3px solid #ddd;
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: 0;
+    position: relative;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -28px;
+    top: 12px;
+    width: 14px;
+    height: 14px;
+    border: 3px solid var(--blue);
+    background: white;
+  }
+
+  .timeline-item.current::before {
+    border-color: var(--green);
+    background: var(--green);
+  }
+
+  .timeline-accent {
+    width: 6px;
+    flex-shrink: 0;
+  }
+
+  .timeline-content {
+    border: var(--border-thin);
+    box-shadow: var(--shadow-boxy-sm);
+    padding: 16px 20px;
+    background: white;
+    flex: 1;
+  }
+
+  .timeline-year {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 4px;
+  }
+
+  .timeline-title {
+    font-family: var(--font-heading);
+    font-size: 12px;
+    color: #222;
+    margin-bottom: 8px;
+  }
+
+  .timeline-desc {
+    font-family: var(--font-body);
+    font-size: 20px;
+    color: #555;
+    line-height: 1.4;
+  }
+
+  .current-badge {
+    display: inline-block;
+    font-family: var(--font-ui);
+    font-size: 10px;
+    background: var(--green);
+    color: white;
+    padding: 2px 8px;
+    margin-top: 8px;
+    border: 1px solid #222;
+  }
+
+  /* Download button */
+  .download-area {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .download-btn {
+    font-family: var(--font-heading);
+    font-size: 12px;
+    padding: 14px 32px;
+    background: var(--blue);
+    color: white;
+    border: var(--border-thick);
+    box-shadow:
+      var(--shadow-boxy),
+      inset 0 -4px 0 rgba(0,0,0,0.2);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.1s;
+  }
+
+  .download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      8px 8px 0 #222,
+      inset 0 -4px 0 rgba(0,0,0,0.2);
+  }
+
+  .download-btn:active {
+    transform: translateY(2px);
+    box-shadow:
+      2px 2px 0 #222,
+      inset 0 2px 0 rgba(0,0,0,0.2);
+  }
+
+  .btn-icon {
+    font-size: 18px;
+  }
+
+</style>
